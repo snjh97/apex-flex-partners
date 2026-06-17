@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Apex Flex Partners | Singapore Recruitment Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; font-size: 15px; line-height: 1.6; }
+
+  /* NAV */
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: #fff; border-bottom: 1px solid #e8e4dc; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: #1a1a2e; letter-spacing: -0.3px; text-decoration: none; }
+  .logo span { color: #b8860b; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { text-decoration: none; color: #4a4a5a; font-size: 13.5px; font-weight: 500; letter-spacing: 0.2px; transition: color 0.2s; }
+  .nav-links a:hover { color: #b8860b; }
+  .nav-cta { background: #1a1a2e; color: #fff; padding: 9px 22px; border-radius: 4px; font-size: 13px; font-weight: 500; text-decoration: none; transition: background 0.2s; }
+  .nav-cta:hover { background: #b8860b; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: #1a1a2e; border-radius: 2px; }
+
+  /* HERO */
+  .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; }
+  .hero-left { background: #1a1a2e; padding: 80px 56px; display: flex; flex-direction: column; justify-content: center; gap: 28px; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: #b8860b; font-weight: 600; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: 44px; line-height: 1.18; color: #fff; font-weight: 600; }
+  .hero-title em { color: #b8860b; font-style: normal; }
+  .hero-sub { color: #a8a8c0; font-size: 15px; line-height: 1.7; max-width: 400px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+  .btn-primary { background: #b8860b; color: #fff; padding: 13px 28px; border-radius: 4px; font-weight: 600; font-size: 14px; text-decoration: none; display: inline-block; transition: background 0.2s; cursor: pointer; border: none; }
+  .btn-primary:hover { background: #9a7009; }
+  .btn-outline { border: 1.5px solid rgba(255,255,255,0.3); color: #fff; padding: 13px 28px; border-radius: 4px; font-weight: 500; font-size: 14px; text-decoration: none; transition: all 0.2s; }
+  .btn-outline:hover { border-color: #b8860b; color: #b8860b; }
+
+  /* HERO RIGHT */
+  .hero-right { background: #f5f2ec; padding: 60px 48px; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
+  .search-label { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #888; font-weight: 600; }
+  .search-box { display: flex; flex-direction: column; gap: 10px; }
+  .search-input { padding: 12px 16px; border: 1.5px solid #ddd; border-radius: 4px; font-size: 14px; font-family: 'Inter', sans-serif; background: #fff; color: #1a1a2e; outline: none; }
+  .search-input:focus { border-color: #b8860b; }
+  .search-select { padding: 12px 16px; border: 1.5px solid #ddd; border-radius: 4px; font-size: 14px; font-family: 'Inter', sans-serif; background: #fff; color: #555; outline: none; appearance: none; -webkit-appearance: none; }
+  .btn-search { background: #b8860b; color: #fff; border: none; padding: 13px; border-radius: 4px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.2s; }
+  .btn-search:hover { background: #9a7009; }
+  .stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 8px; }
+  .stat-card { text-align: center; background: #fff; padding: 16px 12px; border-radius: 6px; border: 1px solid #e8e4dc; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #b8860b; }
+  .stat-desc { font-size: 11px; color: #888; margin-top: 2px; letter-spacing: 0.3px; }
+
+  /* SECTION SHARED */
+  section { padding: 80px 48px; }
+  .section-eyebrow { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: #b8860b; font-weight: 600; margin-bottom: 10px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 600; color: #1a1a2e; line-height: 1.25; margin-bottom: 14px; }
+  .section-sub { color: #6a6a7a; font-size: 15px; max-width: 560px; }
+
+  /* SPECIALISATIONS */
+  .spec-section { background: #fff; }
+  .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 44px; }
+  .spec-card { border: 1.5px solid #e8e4dc; border-radius: 6px; padding: 24px 20px; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 10px; }
+  .spec-card:hover { border-color: #b8860b; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(184,134,11,0.08); }
+  .spec-icon { font-size: 22px; }
+  .spec-name { font-weight: 600; font-size: 14px; color: #1a1a2e; }
+  .spec-desc { font-size: 12.5px; color: #888; line-height: 1.5; }
+
+  /* HOW IT WORKS */
+  .hiw-section { background: #1a1a2e; }
+  .hiw-section .section-title { color: #fff; }
+  .hiw-section .section-sub { color: #a8a8c0; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 52px; }
+  .step { padding: 32px 28px; border-right: 1px solid rgba(255,255,255,0.08); }
+  .step:last-child { border-right: none; }
+  .step-num { font-family: 'Playfair Display', serif; font-size: 48px; color: rgba(184,134,11,0.25); font-weight: 600; line-height: 1; margin-bottom: 14px; }
+  .step-title { font-weight: 600; color: #fff; font-size: 15px; margin-bottom: 8px; }
+  .step-text { font-size: 13px; color: #a8a8c0; line-height: 1.6; }
+
+  /* FEATURED JOBS */
+  .jobs-section { background: #f9f7f3; }
+  .jobs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 44px; }
+  .job-card { background: #fff; border: 1.5px solid #e8e4dc; border-radius: 6px; padding: 24px 22px; display: flex; flex-direction: column; gap: 10px; transition: border-color 0.2s, box-shadow 0.2s; }
+  .job-card:hover { border-color: #b8860b; box-shadow: 0 4px 16px rgba(184,134,11,0.08); }
+  .job-tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: #7a5c00; background: #f5e8c0; padding: 3px 10px; border-radius: 3px; }
+  .job-title { font-weight: 600; font-size: 15px; color: #1a1a2e; }
+  .job-meta { font-size: 12.5px; color: #888; display: flex; gap: 14px; flex-wrap: wrap; }
+  .job-salary { font-size: 13px; font-weight: 600; color: #b8860b; }
+  .job-apply { margin-top: 6px; font-size: 13px; font-weight: 600; color: #1a1a2e; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s; }
+  .job-apply:hover { color: #b8860b; }
+  .view-all-wrap { margin-top: 36px; text-align: center; }
+
+  /* WHY US */
+  .why-section { background: #fff; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 52px; align-items: start; }
+  .why-list { display: flex; flex-direction: column; gap: 24px; }
+  .why-item { display: flex; gap: 16px; }
+  .why-dot { width: 10px; height: 10px; background: #b8860b; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+  .why-item-title { font-weight: 600; font-size: 15px; color: #1a1a2e; margin-bottom: 4px; }
+  .why-item-text { font-size: 13.5px; color: #6a6a7a; line-height: 1.6; }
+  .why-image-placeholder { background: #f5f2ec; border-radius: 8px; height: 380px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; border: 2px dashed #ddd; }
+  .why-image-placeholder p { font-size: 13px; color: #aaa; text-align: center; padding: 0 32px; line-height: 1.6; }
+
+  /* TESTIMONIALS */
+  .testi-section { background: #f9f7f3; }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 44px; }
+  .testi-card { background: #fff; border: 1.5px solid #e8e4dc; border-radius: 6px; padding: 26px 22px; }
+  .testi-stars { color: #b8860b; font-size: 14px; margin-bottom: 12px; letter-spacing: 2px; }
+  .testi-quote { font-size: 13.5px; color: #4a4a5a; line-height: 1.7; font-style: italic; margin-bottom: 16px; }
+  .testi-author { font-weight: 600; font-size: 13px; color: #1a1a2e; }
+  .testi-role { font-size: 12px; color: #888; }
+
+  /* CONTACT */
+  .contact-section { display: grid; grid-template-columns: 1fr 1fr; }
+  .contact-left { background: #1a1a2e; padding: 72px 56px; }
+  .contact-left .section-eyebrow { color: #b8860b; }
+  .contact-left .section-title { color: #fff; }
+  .contact-left .section-sub { color: #a8a8c0; margin-bottom: 36px; }
+  .contact-detail { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+  .contact-icon { font-size: 18px; margin-top: 2px; }
+  .contact-text strong { color: #fff; font-size: 14px; display: block; margin-bottom: 3px; }
+  .contact-text span { color: #a8a8c0; font-size: 13.5px; }
+  .ea-badge { display: inline-block; background: rgba(184,134,11,0.15); border: 1px solid rgba(184,134,11,0.3); color: #b8860b; font-size: 11px; padding: 4px 12px; border-radius: 3px; margin-top: 8px; }
+  .contact-right { background: #242440; padding: 72px 56px; }
+  .form-row { display: flex; flex-direction: column; gap: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 12px; color: #a8a8c0; font-weight: 500; letter-spacing: 0.3px; }
+  .form-input { padding: 11px 14px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; color: #fff; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.2s; }
+  .form-input::placeholder { color: rgba(255,255,255,0.3); }
+  .form-input:focus { border-color: #b8860b; }
+  .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-success { display: none; background: rgba(29,158,117,0.15); border: 1px solid rgba(29,158,117,0.4); color: #5dcaa5; padding: 12px 16px; border-radius: 4px; font-size: 13px; }
+
+  /* FOOTER */
+  footer { background: #0f0f20; padding: 48px 48px 32px; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 12px; }
+  .footer-logo span { color: #b8860b; }
+  .footer-desc { font-size: 13px; color: #666; line-height: 1.7; max-width: 280px; }
+  .footer-col-title { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #b8860b; font-weight: 600; margin-bottom: 14px; }
+  .footer-col a { display: block; color: #666; text-decoration: none; font-size: 13px; margin-bottom: 8px; transition: color 0.2s; }
+  .footer-col a:hover { color: #b8860b; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 12px; color: #444; }
+  .footer-legal { display: flex; gap: 20px; }
+  .footer-legal a { font-size: 12px; color: #444; text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: #b8860b; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 60px 24px; }
+    .hero-right { padding: 40px 24px; }
+    .hero-title { font-size: 32px; }
+    section { padding: 56px 24px; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .why-grid { grid-template-columns: 1fr; }
+    .why-image-placeholder { height: 220px; }
+    .contact-section { grid-template-columns: 1fr; }
+    .contact-left, .contact-right { padding: 48px 24px; }
+    .form-grid-2 { grid-template-columns: 1fr; }
+    footer { padding: 40px 24px 28px; }
+    .footer-top { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .steps { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .hero-actions { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Apex Flex <span>Partners</span></a>
+  <ul class="nav-links">
+    <li><a href="#specialisations">Specialisations</a></li>
+    <li><a href="#jobs">Open Roles</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Submit a Job</a>
+  <button class="hamburger" onclick="document.querySelector('.nav-links').style.display='flex'" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Singapore's Trusted Recruitment Partner</div>
+    <h1 class="hero-title">We place <em>the right talent</em> in the right role</h1>
+    <p class="hero-sub">Apex Flex Partners connects employers and professionals across Singapore's key industries — with precision, care, and genuine market expertise.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Find Talent</a>
+      <a href="#jobs" class="btn-outline">Browse Jobs</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="search-label">Quick Job Search</div>
+    <div class="search-box">
+      <input class="search-input" type="text" placeholder="Job title or keyword" id="search-keyword" />
+      <select class="search-select" id="search-industry">
+        <option value="" disabled selected>Select industry</option>
+        <option>Banking &amp; Finance</option>
+        <option>Technology</option>
+        <option>Human Resources</option>
+        <option>Sales &amp; Marketing</option>
+        <option>Accounting &amp; Finance</option>
+        <option>Supply Chain &amp; Procurement</option>
+      </select>
+      <select class="search-select" id="search-location">
+        <option value="" disabled selected>Select location</option>
+        <option>Central Singapore (CBD)</option>
+        <option>West</option>
+        <option>East</option>
+        <option>North</option>
+        <option>Islandwide / Remote</option>
+      </select>
+      <button class="btn-search" onclick="document.getElementById('jobs').scrollIntoView({behavior:'smooth'})">Search Jobs &rarr;</button>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">50+</div>
+        <div class="stat-desc">Active Roles</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">200+</div>
+        <div class="stat-desc">Placed This Year</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">80+</div>
+        <div class="stat-desc">Client Companies</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPECIALISATIONS -->
+<section class="spec-section" id="specialisations">
+  <div class="section-eyebrow">What We Cover</div>
+  <h2 class="section-title">Our Specialisations</h2>
+  <p class="section-sub">We recruit across a focused set of industries where our consultants have deep networks and genuine expertise built in Singapore.</p>
+  <div class="spec-grid">
+    <div class="spec-card">
+      <div class="spec-icon">🏦</div>
+      <div class="spec-name">Banking &amp; Finance</div>
+      <div class="spec-desc">Front, middle &amp; back office roles across banks, asset managers and financial institutions.</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">💻</div>
+      <div class="spec-name">Technology</div>
+      <div class="spec-desc">Software engineers, IT infrastructure, cybersecurity, data and product roles.</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">📊</div>
+      <div class="spec-name">Accounting &amp; Finance</div>
+      <div class="spec-desc">CFOs, controllers, finance analysts, tax specialists and audit professionals.</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">👥</div>
+      <div class="spec-name">Human Resources</div>
+      <div class="spec-desc">HR business partners, talent acquisition leads, L&amp;D and compensation specialists.</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">📣</div>
+      <div class="spec-name">Sales &amp; Marketing</div>
+      <div class="spec-desc">Business development managers, brand directors, digital and performance marketers.</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">🔗</div>
+      <div class="spec-name">Supply Chain</div>
+      <div class="spec-desc">Procurement managers, logistics leads, category directors and operations roles.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="hiw-section">
+  <div class="section-eyebrow">The Process</div>
+  <h2 class="section-title">How we work with you</h2>
+  <p class="section-sub">A clear, honest process from first conversation to successful placement.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Discovery Call</div>
+      <div class="step-text">We take the time to understand your role requirements, team culture, timeline, and compensation expectations.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Targeted Search</div>
+      <div class="step-text">Our consultants tap into our active Singapore network and proprietary candidate database to source the right fit.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Shortlist &amp; Debrief</div>
+      <div class="step-text">We present a curated shortlist with detailed profiles and our consultants' honest recommendation for each candidate.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Placement &amp; Support</div>
+      <div class="step-text">We manage offer negotiations, onboarding support, and follow up at 30, 60, and 90 days post-placement.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED JOBS -->
+<section class="jobs-section" id="jobs">
+  <div class="section-eyebrow">Current Openings</div>
+  <h2 class="section-title">Featured Roles</h2>
+  <p class="section-sub">A selection of live positions. Contact us to see the full list or register your profile.</p>
+  <div class="jobs-grid">
+    <div class="job-card">
+      <div><span class="job-tag">Banking</span></div>
+      <div class="job-title">Relationship Manager, Private Banking</div>
+      <div class="job-meta"><span>📍 Orchard, Singapore</span><span>⏱ Permanent</span></div>
+      <div class="job-salary">S$8,000 – S$12,000 / month</div>
+      <a href="#contact" class="job-apply">Apply now &rarr;</a>
+    </div>
+    <div class="job-card">
+      <div><span class="job-tag">Technology</span></div>
+      <div class="job-title">Senior Software Engineer (Fintech)</div>
+      <div class="job-meta"><span>📍 Marina Bay, Singapore</span><span>⏱ Permanent</span></div>
+      <div class="job-salary">S$10,000 – S$16,000 / month</div>
+      <a href="#contact" class="job-apply">Apply now &rarr;</a>
+    </div>
+    <div class="job-card">
+      <div><span class="job-tag">HR</span></div>
+      <div class="job-title">HR Business Partner (Regional)</div>
+      <div class="job-meta"><span>📍 Tanjong Pagar, Singapore</span><span>⏱ Permanent</span></div>
+      <div class="job-salary">S$7,500 – S$10,000 / month</div>
+      <a href="#contact" class="job-apply">Apply now &rarr;</a>
+    </div>
+    <div class="job-card">
+      <div><span class="job-tag">Accounting</span></div>
+      <div class="job-title">Finance Manager, APAC</div>
+      <div class="job-meta"><span>📍 Raffles Place, Singapore</span><span>⏱ Permanent</span></div>
+      <div class="job-salary">S$9,000 – S$13,000 / month</div>
+      <a href="#contact" class="job-apply">Apply now &rarr;</a>
+    </div>
+    <div class="job-card">
+      <div><span class="job-tag">Sales</span></div>
+      <div class="job-title">Business Development Manager</div>
+      <div class="job-meta"><span>📍 Central Singapore</span><span>⏱ Permanent</span></div>
+      <div class="job-salary">S$6,000 – S$9,000 + commission</div>
+      <a href="#contact" class="job-apply">Apply now &rarr;</a>
+    </div>
+    <div class="job-card">
+      <div><span class="job-tag">Supply Chain</span></div>
+      <div class="job-title">Procurement Manager, Asia</div>
+      <div class="job-meta"><span>📍 Jurong, Singapore</span><span>⏱ Permanent</span></div>
+      <div class="job-salary">S$7,000 – S$11,000 / month</div>
+      <a href="#contact" class="job-apply">Apply now &rarr;</a>
+    </div>
+  </div>
+  <div class="view-all-wrap">
+    <a href="#contact" class="btn-primary">Register to see all open roles</a>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section" id="about">
+  <div class="section-eyebrow">Why Choose Us</div>
+  <h2 class="section-title">The Apex Flex difference</h2>
+  <div class="why-grid">
+    <div class="why-list">
+      <div class="why-item">
+        <div class="why-dot"></div>
+        <div>
+          <div class="why-item-title">Deep Singapore market knowledge</div>
+          <div class="why-item-text">Our consultants live and work in Singapore. We understand local hiring norms, MOM EP/S-Pass regulations, and realistic salary benchmarks across all levels.</div>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-dot"></div>
+        <div>
+          <div class="why-item-title">Specialist, not generalist</div>
+          <div class="why-item-text">We focus on a defined set of industries so our networks run deep. You get consultants who genuinely know your sector and the people in it.</div>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-dot"></div>
+        <div>
+          <div class="why-item-title">Honest, transparent communication</div>
+          <div class="why-item-text">We tell you what's realistic on timelines, salaries, and talent availability. No over-promising, no wasted time — just straight talk and good guidance.</div>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-dot"></div>
+        <div>
+          <div class="why-item-title">Post-placement support</div>
+          <div class="why-item-text">Our relationship doesn't end at an offer letter. We check in at 30, 60, and 90 days to ensure both employer and candidate are set up for success.</div>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-dot"></div>
+        <div>
+          <div class="why-item-title">MOM licensed and compliant</div>
+          <div class="why-item-text">We operate as a fully licensed Employment Agency under Singapore's Ministry of Manpower — giving you peace of mind on every placement.</div>
+        </div>
+      </div>
+    </div>
+    <div class="why-image-placeholder">
+      <div style="font-size:48px; opacity:0.2;">🖼</div>
+      <p><strong style="color:#bbb; display:block; margin-bottom:6px;">Add your team photo here</strong>A real photo of your office or consultants builds significant trust with prospective clients and candidates.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <div class="section-eyebrow">What People Say</div>
+  <h2 class="section-title">Trusted by employers and candidates</h2>
+  <p class="section-sub">Real feedback from the companies and professionals we've worked with across Singapore.</p>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"The team at Apex Flex Partners found us the right candidate within two weeks. Professional, responsive, and they really understood our culture and requirements."</div>
+      <div class="testi-author">Replace with real name</div>
+      <div class="testi-role">HR Director, [Company Name]</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"My consultant took the time to really understand what I was looking for — not just the salary but the right role fit and the right team environment."</div>
+      <div class="testi-author">Replace with real name</div>
+      <div class="testi-role">Senior Finance Manager, placed 2024</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"We've now used Apex Flex Partners for three hires across different functions. Consistent quality and they genuinely understand our industry."</div>
+      <div class="testi-author">Replace with real name</div>
+      <div class="testi-role">CEO, [Company Name]</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-left">
+    <div class="section-eyebrow">Get In Touch</div>
+    <h2 class="section-title">Let's talk about your needs</h2>
+    <p class="section-sub">Whether you're an employer looking to hire or a professional exploring new opportunities — we respond within one business day.</p>
+    <div class="contact-detail">
+      <div class="contact-icon">📍</div>
+      <div class="contact-text">
+        <strong>Office Address</strong>
+        <span>Add your Singapore office address here</span>
+      </div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-icon">📞</div>
+      <div class="contact-text">
+        <strong>Phone</strong>
+        <span>+65 XXXX XXXX</span>
+      </div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-icon">✉️</div>
+      <div class="contact-text">
+        <strong>Email</strong>
+        <span>hello@apexflexpartners.com.sg</span>
+      </div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-icon">🕐</div>
+      <div class="contact-text">
+        <strong>Office Hours</strong>
+        <span>Monday – Friday, 9am – 6pm SGT</span>
+      </div>
+    </div>
+    <div class="ea-badge">MOM Licensed EA · Licence No. [XXXX]</div>
+  </div>
+  <div class="contact-right">
+    <div class="form-row">
+      <div class="form-grid-2">
+        <div class="form-group">
+          <div class="form-label">Your Name</div>
+          <input class="form-input" type="text" placeholder="Jane Tan" id="f-name"/>
+        </div>
+        <div class="form-group">
+          <div class="form-label">Email Address</div>
+          <input class="form-input" type="email" placeholder="jane@company.com" id="f-email"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-label">Phone Number</div>
+        <input class="form-input" type="tel" placeholder="+65 XXXX XXXX" id="f-phone"/>
+      </div>
+      <div class="form-group">
+        <div class="form-label">I am a...</div>
+        <select class="form-input" id="f-type">
+          <option value="" disabled selected>Select one</option>
+          <option>Employer looking to hire</option>
+          <option>Job seeker / candidate</option>
+          <option>Other enquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <div class="form-label">Message</div>
+        <textarea class="form-input" rows="4" placeholder="Tell us briefly what you're looking for..." id="f-msg"></textarea>
+      </div>
+      <button class="btn-primary" onclick="handleSubmit()" style="width:100%; padding:14px; font-size:15px; border:none; cursor:pointer;">Send Message &rarr;</button>
+      <div class="form-success" id="form-success">✓ Thank you! We'll be in touch within one business day.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Apex Flex <span>Partners</span></div>
+      <p class="footer-desc">Singapore's specialist recruitment partner connecting outstanding employers with outstanding talent across key industries.</p>
+      <div class="ea-badge" style="margin-top:14px;">EA Licence No. [XXXX] · UEN: [XXXX]</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Services</div>
+      <a href="#specialisations">For Employers</a>
+      <a href="#jobs">For Job Seekers</a>
+      <a href="#specialisations">Specialisations</a>
+      <a href="#contact">Submit a Role</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Personal Data Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Apex Flex Partners Pte. Ltd. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">PDPA Statement</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function handleSubmit() {
+  var name = document.getElementById('f-name').value;
+  var email = document.getElementById('f-email').value;
+  if (!name || !email) {
+    alert('Please fill in your name and email before submitting.');
+    return;
+  }
+  document.getElementById('form-success').style.display = 'block';
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-email').value = '';
+  document.getElementById('f-phone').value = '';
+  document.getElementById('f-msg').value = '';
+}
+</script>
+</body>
+</html>
